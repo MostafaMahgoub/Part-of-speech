@@ -9,7 +9,6 @@ This is a web-based interactive activity that helps students practice categorizi
 - [Endpoints](#endpoints)
 - [Testing](#testing)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -27,16 +26,15 @@ npm install
 
 To start the server, navigate to the `server` folder and run:
 
-npm start
+`node index.js`
 
 
 This will start the server on port 3000.
 
 To start the client, navigate to the `client` folder and run:
 
-npm start
+`npm start`
 
-sql_more
 
 This will start the client on port 3001.
 
@@ -51,18 +49,10 @@ The client interacts with the `/words` endpoint to fetch the words list and disp
 
 ## Testing
 
-To run the test suite for the server side, navigate to the `server` folder and run:
-
-npm test
-
-
-This will run the test suite using Jest.
 
 To run the test suite for the client side, navigate to the `client` folder and run:
 
-npm test
-
-livecodeserver
+`npm test`
 
 This will run the test suite using Jest and Enzyme.
 
