@@ -30,7 +30,7 @@ app.get('/words', (req, res) => {
 
   for (let i = 0; i < 6; i++) {
     const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-    randomWords.push({ word: randomWord.word, pos: randomWord.pos, id: randomWord.id });
+    randomWords.push({ id: randomWord.id, word: randomWord.word, pos: randomWord.pos });
   }
 
   res.json(randomWords);
