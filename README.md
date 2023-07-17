@@ -14,12 +14,12 @@ This is a web-based interactive activity that helps students practice categorizi
 
 To install the dependencies for the server side, navigate to the `server` folder and run:
 
-npm install
+`npm install`
 
 
 To install the dependencies for the client side, navigate to the `client` folder and run:
 
-npm install
+`npm install`
 
 
 ## Usage
@@ -35,8 +35,6 @@ To start the client, navigate to the `client` folder and run:
 
 `npm start`
 
-
-This will start the client on port 3001.
 
 ## Endpoints
 
