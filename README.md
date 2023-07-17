@@ -17,13 +17,11 @@ To install the dependencies for the server side, navigate to the `server` folder
 
 npm install
 
-Copy
 
 To install the dependencies for the client side, navigate to the `client` folder and run:
 
 npm install
 
-Copy
 
 ## Usage
 
@@ -31,7 +29,6 @@ To start the server, navigate to the `server` folder and run:
 
 npm start
 
-Copy
 
 This will start the server on port 3000.
 
@@ -40,7 +37,6 @@ To start the client, navigate to the `client` folder and run:
 npm start
 
 sql_more
-Copy
 
 This will start the client on port 3001.
 
@@ -59,7 +55,6 @@ To run the test suite for the server side, navigate to the `server` folder and r
 
 npm test
 
-Copy
 
 This will run the test suite using Jest.
 
@@ -68,7 +63,6 @@ To run the test suite for the client side, navigate to the `client` folder and r
 npm test
 
 livecodeserver
-Copy
 
 This will run the test suite using Jest and Enzyme.
 
