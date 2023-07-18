@@ -1,36 +1,12 @@
-import React, { useRef , useState ,useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import PracticeScreen from './practice-screen/practiceScreen';
-import './index.css';
+// index.tsx
 
-function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-  const handleThemeToggle = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
-
-  const bodyClassName = isDarkTheme ? "background-dark" : "background-light";
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    if (body) {
-      body.className = bodyClassName;
-    }
-  }, [bodyClassName]);
-
-  return (
-    <div className="Main-Container">
-      <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
-    </div>
-  );
-}
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
