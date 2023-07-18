@@ -1,11 +1,13 @@
 const express = require('express');
 const testData = require('./TestData.json');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Endpoint that returns a list of 10 random words
 app.get('/words', (req, res) => {
