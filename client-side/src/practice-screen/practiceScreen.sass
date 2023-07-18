@@ -110,3 +110,42 @@ $color-light: #444444
 img
     width: 60%
     height: 60%
+
+.fade-out 
+  opacity: 0
+  visibility: hidden
+  position: absolute
+  transition: opacity 0.5s ease-out, visibility 0s linear 0.5s
+
+.word-dark
+  color: aliceblue
+  font-size: xxx-large
+  font-family: ui-sans-serif
+  display: flex
+  justify-content: center
+  animation-name: slideUp
+  animation-duration: 0.5s
+  animation-fill-mode: forwards
+
+.word-light
+  color: black
+  font-size: xxx-large
+  font-family: ui-sans-serif
+  display: flex
+  justify-content: center
+  animation-name: slideUp
+  animation-duration: 0.5s
+  animation-fill-mode: forwards
+
+@keyframes slideUp
+  from
+    opacity: 0
+    transform: translateY(100%)
+
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.Buttons-Container
+  text-align: center
+
