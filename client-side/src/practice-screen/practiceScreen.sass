@@ -1,4 +1,9 @@
 
+$color-dark: #BFC0C0
+$color-light: #444444
+
+
+  
 .PracticeScreen-Container
   display: flex
   justify-content: center
@@ -15,11 +20,11 @@
   border-top: 1px solid #fbfbfb
   box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2)
 
-.button
+.button-dark
   display: inline-flex
   height: 40px
   width: 200px
-  border: 2px solid #BFC0C0
+  border: 2px solid $color-dark
   margin: 20px 20px 20px 20px
   color: #BFC0C0
   text-transform: uppercase
@@ -30,8 +35,28 @@
   justify-content: center
   overflow: hidden
 
-a
+.button-light
+  display: inline-flex
+  height: 40px
+  width: 200px
+  border: 2px solid $color-light
+  margin: 20px 20px 20px 20px
   color: #BFC0C0
+  text-transform: uppercase
+  text-decoration: none
+  font-size: .8em
+  letter-spacing: 1.5px
+  align-items: center
+  justify-content: center
+  overflow: hidden
+
+.a-dark
+  color: $color-dark
+  text-decoration: none
+  letter-spacing: 1px
+
+.a-light
+  color: $color-light
   text-decoration: none
   letter-spacing: 1px
 
@@ -85,12 +110,10 @@ a
   &:hover
     opacity: 0.8
 
-.shadow-dark
+.themeClass
   background: transparent
-  box-shadow: 4px 1px 23px #1a1d20, 3px -1px 23px #565656, inset 5px 5px 4px #6a6a6a, inset 1px -2px 4px #404040
+  box-shadow: 4px 1px 23px #1a1d20, 3px -1px 23px #565656, inset 5px 5px 4px #9d9999, inset 1px -2px 4px #404040
 
-.shadow-light
-  box-shadow: 4px 1px 23px #1a1d20, 3px -1px 23px #565656, inset 5px 5px 4px #6a6a6a, inset 1px -2px 4px #404040
 
 @keyframes change
   0%
@@ -99,8 +122,8 @@ a
   100%
     transform: scale(1.4)
 
-.change
-  animation-name: change
-  animation-duration: 1s
-  animation-direction: alternate
 
+
+img
+    width: 60%
+    height: 60%
