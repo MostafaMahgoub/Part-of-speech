@@ -1,7 +1,7 @@
-import { useState } from "react";
 import "./practiceScreen.sass";
 import darkThemeIcon from "./assets/dark-theme.png";
 import lightThemeIcon from "./assets/light-theme.png";
+import ButtonComponent from "./buttonComponent";
 
 interface PracticeScreenProps {
     isDarkTheme: boolean;
@@ -17,10 +17,7 @@ function PracticeScreen({ isDarkTheme , handleThemeToggle }: PracticeScreenProps
 
   return (
     <div>
-      <div className={`${isDarkTheme ? "button-dark" : "button-light"}`} id="Practice-Button">
-        <div id="circle"></div>
-        <a className={`${isDarkTheme ? "a-dark" : "a-light"}`} href="#">Start your practice</a>
-      </div>
+      <ButtonComponent isDarkTheme={isDarkTheme} title="Start your practice" />
       <div
         className={`theme-container themeClass`}
         onClick={handleThemeToggle}
