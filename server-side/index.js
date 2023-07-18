@@ -9,28 +9,22 @@ app.use(bodyParser.json());
 
 // Endpoint that returns a list of 10 random words
 app.get('/words', (req, res) => {
-  const wordList = testData.wordList;
+  const wordList = testData.wordList.slice(); // create a copy of the wordList array
+  const randomWords = [];
 
-  const adjectives = wordList.filter(word => word.pos === 'adjective');
-  const adverbs = wordList.filter(word => word.pos === 'adverb');
-  const nouns = wordList.filter(word => word.pos === 'noun');
-  const verbs = wordList.filter(word => word.pos === 'verb');
+  // Select one random word for each part of speech
+  ['adjective', 'adverb', 'noun', 'verb'].forEach(pos => {
+    const words = wordList.filter(word => word.pos === pos);
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+    randomWords.push(randomWord);
+    wordList.splice(wordList.indexOf(randomWord), 1); // remove the selected word from the wordList array
+  });
 
-  const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-  const randomAdverb = adverbs[Math.floor(Math.random() * adverbs.length)];
-  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
-  const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
-
-  const randomWords = [
-    { id: randomAdjective.id, word: randomAdjective.word, pos: randomAdjective.pos },
-    { id: randomAdverb.id, word: randomAdverb.word, pos: randomAdverb.pos },
-    { id: randomNoun.id, word: randomNoun.word, pos: randomNoun.pos },
-    { id: randomVerb.id, word: randomVerb.word, pos: randomVerb.pos },
-  ];
-
+  // Select six additional random words
   for (let i = 0; i < 6; i++) {
     const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-    randomWords.push({ id: randomWord.id, word: randomWord.word, pos: randomWord.pos });
+    randomWords.push(randomWord);
+    wordList.splice(wordList.indexOf(randomWord), 1); // remove the selected word from the wordList array
   }
 
   res.json(randomWords);
