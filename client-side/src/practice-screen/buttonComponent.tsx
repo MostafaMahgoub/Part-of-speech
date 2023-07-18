@@ -1,7 +1,5 @@
 
 
-import "./practiceScreen.sass";
-
 interface ButtonProps {
   isDarkTheme: boolean;
   title: string;
