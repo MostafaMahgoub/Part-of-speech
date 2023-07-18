@@ -16,7 +16,7 @@ function PracticeScreen({ isDarkTheme , handleThemeToggle }: PracticeScreenProps
   
 
   return (
-    <div className="PracticeScreen-Container">
+    <div>
       <div className={`${isDarkTheme ? "button-dark" : "button-light"}`} id="Practice-Button">
         <div id="circle"></div>
         <a className={`${isDarkTheme ? "a-dark" : "a-light"}`} href="#">Start your practice</a>

@@ -20,7 +20,7 @@ function App() {
   }, [bodyClassName]);
 
   return (
-    <div>
+    <div className="Main-Container">
       <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
     </div>
   );
