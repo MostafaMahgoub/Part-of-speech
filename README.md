@@ -12,6 +12,8 @@ This is a web-based interactive activity that helps students practice categorizi
 
 ## Installation
 
+**YOU HAVE TO RUN THE SERVER SIDE FIRST**
+
 To clone the repository, run:
 
 `git clone https://github.com/MostafaMahgoub/Part-of-speech.git`
