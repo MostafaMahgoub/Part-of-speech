@@ -12,6 +12,10 @@ This is a web-based interactive activity that helps students practice categorizi
 
 ## Installation
 
+To clone the repository, run:
+
+`git clone https://github.com/MostafaMahgoub/Part-of-speech.git`
+
 To install the dependencies for the server side, navigate to the `server` folder and run:
 
 `npm install`
