@@ -33,7 +33,6 @@ function PracticeScreen({
       [key: string]: string
   } > ({});
   const [answered, setAnswered] = useState(false);
-  const [completed, setCompleted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [confirmation, setConfirmation] = useState(false);
   useEffect(() => {
@@ -44,37 +43,29 @@ function PracticeScreen({
           setWords(wordsWithPos);
       }).catch((error) => console.error(error));
   }, []);
-
   useEffect(() => {
-    const handleBlur = () => {
-      if(showWords)
-      {
-      alert("Termination : You have clicked outside of the quiz area. Your quiz will be terminated.");
-      window.location.reload();
-      }
-    };
-
-    window.addEventListener("blur", handleBlur);
-
-    return () => {
-      window.removeEventListener("blur", handleBlur);
-    };
+      const handleBlur = () => {
+          if (showWords) {
+              alert("Termination : You have clicked outside of the quiz area. Your quiz will be terminated.");
+              window.location.reload();
+          }
+      };
+      window.addEventListener("blur", handleBlur);
+      return () => {
+          window.removeEventListener("blur", handleBlur);
+      };
   }, [showWords]);
-
   const handleClick = () => {
-    const confirmed = window.confirm("Warning: Clicking outside the quiz area will lead to the termination of the quiz. Your progress will be lost and you will need to start over. Do you want to start the quiz?");
-  
-    if (confirmed) {
-      setTimeout(() => {
-        setShowWords(true);
-        setButtonColors({});
-        setConfirmation(true);
-      }, 50);
-    }
-    else
-    {
-      setConfirmation(false);
-    }
+      const confirmed = window.confirm("Warning: Clicking outside the quiz area will lead to the termination of the quiz. Your progress will be lost and you will need to start over. Do you want to start the quiz?");
+      if (confirmed) {
+          setTimeout(() => {
+              setShowWords(true);
+              setButtonColors({});
+              setConfirmation(true);
+          }, 50);
+      } else {
+          setConfirmation(false);
+      }
   };
   const handleButtonClick = (buttonPosition: string) => {
       const currentWord = words[wordIndex];
@@ -94,13 +85,9 @@ function PracticeScreen({
       }
   };
   const handleNextClick = () => {
-      if (wordIndex === words.length - 1) {
-          setCompleted(true);
-      } else {
-          setWordIndex((prevIndex) => prevIndex + 1);
-          setButtonColors({});
-          setAnswered(false);
-      }
+      setWordIndex((prevIndex) => prevIndex + 1);
+      setButtonColors({});
+      setAnswered(false);
   };
   const handelFinishClick = () => {
       const totalQuestions = words.length;
@@ -121,53 +108,53 @@ function PracticeScreen({
   };
   const renderButton = (buttonPosition: string) => {
       return (<Button
-      isDarkTheme={isDarkTheme}
-      title={buttonPosition}
-      onClick={() => handleButtonClick(buttonPosition)}
-      style={{ backgroundColor: buttonColors[buttonPosition] }}
-      disabled={answered}
-    />);
+    isDarkTheme={isDarkTheme}
+    title={buttonPosition}
+    onClick={() => handleButtonClick(buttonPosition)}
+    style={{ backgroundColor: buttonColors[buttonPosition] }}
+    disabled={answered}
+  />);
   };
   const currentWord = words[wordIndex];
   const wordClass = isDarkTheme ? "word-dark" : "word-light";
   const progress = ((wordIndex + 1) / words.length) * 100;
   return (<div>
-    <div>
-    {!showWords && (
-      <Button
-        isDarkTheme={isDarkTheme}
-        title="Start your practice"
-        onClick={handleClick}
-        confirmation={confirmation}
-      />
-    )}
-    {showWords && (
-      <div className="word-container">
-        <ProgressBar progress={progress} />
-        <div key={currentWord.id} className={wordClass}>
-          {currentWord.word}
-        </div>
-        <div className="Buttons-Container">
-          {renderButton("noun")}
-          {renderButton("adverb")}
-          {renderButton("adjective")}
-          {renderButton("verb")}
-        </div>
-
-          <div className="Buttons-Container">
-            <Button
-              isDarkTheme={isDarkTheme}
-              title={completed ? "Finish" : "Next"}
-              onClick={completed ? handelFinishClick : handleNextClick}
-              style={{ backgroundColor: "" }}
-              disabled= {!answered}
-            />
-          </div>
-       
+  <div>
+  {!showWords && (
+    <Button
+      isDarkTheme={isDarkTheme}
+      title="Start your practice"
+      onClick={handleClick}
+      confirmation={confirmation}
+    />
+  )}
+  {showWords && (
+    <div className="word-container">
+      <ProgressBar progress={progress} />
+      <div key={currentWord.id} className={wordClass}>
+        {currentWord.word}
       </div>
-    )}
+      <div className="Buttons-Container">
+        {renderButton("noun")}
+        {renderButton("adverb")}
+        {renderButton("adjective")}
+        {renderButton("verb")}
+      </div>
+
+        <div className="Buttons-Container">
+          <Button
+            isDarkTheme={isDarkTheme}
+            title={wordIndex === 9 ? "Finish" : "Next"}
+            onClick={wordIndex === 9 ? handelFinishClick : handleNextClick}
+            style={{ backgroundColor: "" }}
+            disabled= {!answered}
+          />
+        </div>
+     
     </div>
-    <IconThemeComponent isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
-  </div>);
+  )}
+  </div>
+  <IconThemeComponent isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
+</div>);
 }
 export default PracticeScreen;
