@@ -8,37 +8,51 @@ interface PracticeScreenProps {
   handleThemeToggle: () => void;
 }
 
+interface WordObject {
+  id: number;
+  word: string;
+  pos: string;
+  correctPos: string;
+}
+
 function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps) {
-  const [words, setWords] = useState<string[]>([]);
+  const [words, setWords] = useState<WordObject[]>([]);
   const [wordIndex, setWordIndex] = useState<number>(0);
   const [showWords, setShowWords] = useState(false);
-
-  interface WordObject {
-    id: number;
-    word: string;
-    pos: string;
-  }
+  const [buttonColors, setButtonColors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     fetch("http://localhost:3000/words")
       .then((response) => response.json())
       .then((data: WordObject[]) => {
-        const words = data.map((wordObj) => wordObj.word);
-        setWords(words);
+        setWords(data);
       })
       .catch((error) => console.error(error));
   }, []);
 
   const handleClick = () => {
     setShowWords(true);
+    setButtonColors({});
   };
+
+  const handleButtonClick = (pos: string) => {
+  const currentWord = words[wordIndex];
+  const isCorrect = pos === currentWord.pos;
+
+  if (isCorrect) {
+    setButtonColors({ ...buttonColors, [pos]: "green" });
+  } else {
+    setButtonColors({ ...buttonColors, [pos]: "red" });
+  }
+};
 
   const handleRightClick = () => {
     setWordIndex((prevIndex) => prevIndex + 1);
+    setButtonColors({});
   };
 
   const handleWrongClick = () => {
-    // Do nothing for now
+    setButtonColors({});
   };
 
   const currentWord = words[wordIndex];
@@ -54,27 +68,39 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
       )}
       {showWords && (
         <div className="word-container">
-          <div key={currentWord} className={`${isDarkTheme ? "word-dark" : "word-light"}`}>{currentWord}</div>
+          <div key={currentWord.id} className={`${isDarkTheme ? "word-dark" : "word-light"}`}>{currentWord.word}</div>
           <div className="Buttons-Container">
             <Button
               isDarkTheme={isDarkTheme}
               title="noun"
-              onClick={handleRightClick}
+              onClick={() => handleButtonClick("noun")}
+              style={{ backgroundColor: buttonColors["noun"] }}
             />
             <Button
               isDarkTheme={isDarkTheme}
               title="adverb"
-              onClick={handleWrongClick}
+              onClick={() => handleButtonClick("adverb")}
+              style={{ backgroundColor: buttonColors["adverb"] }}
             />
             <Button
               isDarkTheme={isDarkTheme}
               title="adjective"
-              onClick={handleWrongClick}
+              onClick={() => handleButtonClick("adjective")}
+              style={{ backgroundColor: buttonColors["adjective"] }}
             />
             <Button
               isDarkTheme={isDarkTheme}
               title="verb"
-              onClick={handleWrongClick}
+              onClick={() => handleButtonClick("verb")}
+              style={{ backgroundColor: buttonColors["verb"] }}
+            />
+          </div>
+          <div className="Buttons-Container">
+            <Button
+              isDarkTheme={isDarkTheme}
+              title="Next"
+              onClick={handleRightClick}
+              style={{ backgroundColor: "" }}
             />
           </div>
         </div>

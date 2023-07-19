@@ -4,9 +4,10 @@ interface ButtonProps {
   isDarkTheme: boolean;
   title: string;
   onClick: () => void;
+  style?: React.CSSProperties;
 }
 
-function Button({ isDarkTheme, title, onClick }: ButtonProps) {
+function Button({ isDarkTheme, title, onClick, style }: ButtonProps) {
   const [fade, setFade] = useState(false);
 
   const handleClick = () => {
@@ -23,6 +24,7 @@ function Button({ isDarkTheme, title, onClick }: ButtonProps) {
       }`}
       onClick={handleClick}
       id="Main-Button"
+      style={style}
     >
       <div id="circle"></div>
       <a
