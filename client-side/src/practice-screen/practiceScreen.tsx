@@ -16,7 +16,7 @@ interface WordObject {
 
 function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps) {
   const [words, setWords] = useState<WordObject[]>([]);
-  const [wordIndex, setWordIndex] = useState<number>(0);
+  const [wordIndex, setWordIndex] = useState(0);
   const [showWords, setShowWords] = useState(false);
   const [buttonColors, setButtonColors] = useState<{ [key: string]: string }>({});
   const [answered, setAnswered] = useState(false);
@@ -40,17 +40,15 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
     setButtonColors({});
   };
 
-  const handleButtonClick = (pos: string) => {
+  const handleButtonClick = (buttonPosition: string) => {
     const currentWord = words[wordIndex];
-    const isCorrect = pos === currentWord.pos;
+    const isCorrect = buttonPosition === currentWord.pos;
     const correctPos = currentWord.pos;
-  
-    const newButtonColors = { [pos]: isCorrect ? "green" : "red" };
-    if (isCorrect) {
-      newButtonColors[correctPos] = "green";
-    } else {
-      newButtonColors[correctPos] = "green";
-    }
+
+    const newButtonColors = {
+      [buttonPosition]: isCorrect ? "green" : "red",
+      [correctPos]: "green",
+    };
     setButtonColors({ ...buttonColors, ...newButtonColors });
     setAnswered(true);
   };
@@ -61,12 +59,20 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
     setAnswered(false);
   };
 
-  const handleWrongClick = () => {
-    setButtonColors({});
-    setAnswered(false);
+  const renderButton = (buttonPosition: string) => {
+    return (
+      <Button
+        isDarkTheme={isDarkTheme}
+        title={buttonPosition}
+        onClick={() => handleButtonClick(buttonPosition)}
+        style={{ backgroundColor: buttonColors[buttonPosition] }}
+        disabled={answered}
+      />
+    );
   };
 
   const currentWord = words[wordIndex];
+  const wordClass = isDarkTheme ? "word-dark" : "word-light";
 
   return (
     <div>
@@ -79,38 +85,14 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
       )}
       {showWords && (
         <div className="word-container">
-          <div key={currentWord.id} className={`${isDarkTheme ? "word-dark" : "word-light"}`}>
+          <div key={currentWord.id} className={wordClass}>
             {currentWord.word}
           </div>
           <div className="Buttons-Container">
-            <Button
-              isDarkTheme={isDarkTheme}
-              title="noun"
-              onClick={() => handleButtonClick("noun")}
-              style={{ backgroundColor: buttonColors["noun"] }}
-              disabled={answered}
-            />
-            <Button
-              isDarkTheme={isDarkTheme}
-              title="adverb"
-              onClick={() => handleButtonClick("adverb")}
-              style={{ backgroundColor: buttonColors["adverb"] }}
-              disabled={answered}
-            />
-            <Button
-              isDarkTheme={isDarkTheme}
-              title="adjective"
-              onClick={() => handleButtonClick("adjective")}
-              style={{ backgroundColor: buttonColors["adjective"] }}
-              disabled={answered}
-            />
-            <Button
-              isDarkTheme={isDarkTheme}
-              title="verb"
-              onClick={() => handleButtonClick("verb")}
-              style={{ backgroundColor: buttonColors["verb"] }}
-              disabled={answered}
-            />
+            {renderButton("noun")}
+            {renderButton("adverb")}
+            {renderButton("adjective")}
+            {renderButton("verb")}
           </div>
           {answered && (
             <div className="Buttons-Container">
