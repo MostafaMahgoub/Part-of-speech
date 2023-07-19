@@ -12,7 +12,6 @@ interface WordObject {
   id: number;
   word: string;
   pos: string;
-  correctPos: string;
 }
 
 function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps) {
@@ -20,12 +19,18 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
   const [wordIndex, setWordIndex] = useState<number>(0);
   const [showWords, setShowWords] = useState(false);
   const [buttonColors, setButtonColors] = useState<{ [key: string]: string }>({});
+  const [answered, setAnswered] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/words")
       .then((response) => response.json())
       .then((data: WordObject[]) => {
-        setWords(data);
+        // Add a correctPos property to each WordObject
+        const wordsWithPos = data.map((word) => ({
+          ...word,
+          correctPos: word.pos,
+        }));
+        setWords(wordsWithPos);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -36,23 +41,27 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
   };
 
   const handleButtonClick = (pos: string) => {
-  const currentWord = words[wordIndex];
-  const isCorrect = pos === currentWord.pos;
+    const currentWord = words[wordIndex];
+    const isCorrect = pos === currentWord.pos;
 
-  if (isCorrect) {
-    setButtonColors({ ...buttonColors, [pos]: "green" });
-  } else {
-    setButtonColors({ ...buttonColors, [pos]: "red" });
-  }
-};
+    if (isCorrect) {
+      setButtonColors({ ...buttonColors, [pos]: "green" });
+    } else {
+      setButtonColors({ ...buttonColors, [pos]: "red" });
+    }
+
+    setAnswered(true);
+  };
 
   const handleRightClick = () => {
     setWordIndex((prevIndex) => prevIndex + 1);
     setButtonColors({});
+    setAnswered(false);
   };
 
   const handleWrongClick = () => {
     setButtonColors({});
+    setAnswered(false);
   };
 
   const currentWord = words[wordIndex];
@@ -68,41 +77,49 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
       )}
       {showWords && (
         <div className="word-container">
-          <div key={currentWord.id} className={`${isDarkTheme ? "word-dark" : "word-light"}`}>{currentWord.word}</div>
+          <div key={currentWord.id} className={`${isDarkTheme ? "word-dark" : "word-light"}`}>
+            {currentWord.word}
+          </div>
           <div className="Buttons-Container">
             <Button
               isDarkTheme={isDarkTheme}
               title="noun"
               onClick={() => handleButtonClick("noun")}
               style={{ backgroundColor: buttonColors["noun"] }}
+              disabled={answered}
             />
             <Button
               isDarkTheme={isDarkTheme}
               title="adverb"
               onClick={() => handleButtonClick("adverb")}
               style={{ backgroundColor: buttonColors["adverb"] }}
+              disabled={answered}
             />
             <Button
               isDarkTheme={isDarkTheme}
               title="adjective"
               onClick={() => handleButtonClick("adjective")}
               style={{ backgroundColor: buttonColors["adjective"] }}
+              disabled={answered}
             />
             <Button
               isDarkTheme={isDarkTheme}
               title="verb"
               onClick={() => handleButtonClick("verb")}
               style={{ backgroundColor: buttonColors["verb"] }}
+              disabled={answered}
             />
           </div>
-          <div className="Buttons-Container">
-            <Button
-              isDarkTheme={isDarkTheme}
-              title="Next"
-              onClick={handleRightClick}
-              style={{ backgroundColor: "" }}
-            />
-          </div>
+          {answered && (
+            <div className="Buttons-Container">
+              <Button
+                isDarkTheme={isDarkTheme}
+                title="Next"
+                onClick={handleRightClick}
+                style={{ backgroundColor: "" }}
+              />
+            </div>
+          )}
         </div>
       )}
       <IconThemeComponent isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
