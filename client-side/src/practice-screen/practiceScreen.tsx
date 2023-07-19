@@ -69,7 +69,7 @@ function PracticeScreen({
         setShowWords(true);
         setButtonColors({});
         setConfirmation(true);
-      }, 500);
+      }, 50);
     }
     else
     {
