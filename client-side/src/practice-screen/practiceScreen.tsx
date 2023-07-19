@@ -8,7 +8,6 @@ import IconThemeComponent from "./IconThemeComponent";
 import ProgressBar from "./progressBar";
 interface PracticeScreenProps {
   isDarkTheme: boolean;
-  isRankScreen: boolean;
   handleThemeToggle: () => void;
   setIsRankScreen: (value: boolean) => void;
   setRank: (value: number | null) => void;
@@ -24,7 +23,6 @@ function PracticeScreen({
   isDarkTheme,
   handleThemeToggle,
   setIsRankScreen,
-  isRankScreen,
   setRank,
   setScore
 }: PracticeScreenProps) {
@@ -105,7 +103,7 @@ function PracticeScreen({
   const wordClass = isDarkTheme ? "word-dark" : "word-light";
   const progress = ((wordIndex + 1) / words.length) * 100;
   return (<div>
-    {!isRankScreen &&(<div>
+    <div>
     {!showWords && (
       <Button
         isDarkTheme={isDarkTheme}
@@ -138,7 +136,7 @@ function PracticeScreen({
        
       </div>
     )}
-    </div>)}
+    </div>
     <IconThemeComponent isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
   </div>);
 }

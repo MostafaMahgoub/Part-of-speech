@@ -24,8 +24,8 @@ function App() {
 
   return (
     <div className="Main-Container">
-      <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} setIsRankScreen={setIsRankScreen} isRankScreen={isRankScreen} setRank={setRank} setScore={setScore} />
-      {isRankScreen && (<RankScreen isDarkTheme = {isDarkTheme}  rank = {rank}  score= {score} />)}
+      {!isRankScreen &&  <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} setIsRankScreen={setIsRankScreen} setRank={setRank} setScore={setScore} />}
+      {isRankScreen && (<RankScreen isDarkTheme = {isDarkTheme}  rank = {rank}  score= {score} setIsRankScreen = {setIsRankScreen} />)}
     </div>
   );
 }
