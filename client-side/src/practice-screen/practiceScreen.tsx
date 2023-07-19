@@ -43,13 +43,15 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
   const handleButtonClick = (pos: string) => {
     const currentWord = words[wordIndex];
     const isCorrect = pos === currentWord.pos;
-
+    const correctPos = currentWord.pos;
+  
+    const newButtonColors = { [pos]: isCorrect ? "green" : "red" };
     if (isCorrect) {
-      setButtonColors({ ...buttonColors, [pos]: "green" });
+      newButtonColors[correctPos] = "green";
     } else {
-      setButtonColors({ ...buttonColors, [pos]: "red" });
+      newButtonColors[correctPos] = "green";
     }
-
+    setButtonColors({ ...buttonColors, ...newButtonColors });
     setAnswered(true);
   };
 
