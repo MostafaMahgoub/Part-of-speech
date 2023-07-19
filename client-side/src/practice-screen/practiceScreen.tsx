@@ -73,6 +73,7 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
 
   const currentWord = words[wordIndex];
   const wordClass = isDarkTheme ? "word-dark" : "word-light";
+  const progress = ((wordIndex + 1) / words.length) * 100;
 
   return (
     <div>
@@ -85,6 +86,17 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
       )}
       {showWords && (
         <div className="word-container">
+          <div className="progress-bar-container">
+            <div
+              className="progress-bar"
+              style={{ width: `${progress}%` }}
+            >
+              <div className="progress-text">{`${Math.round(
+              progress
+            )}%`}</div>
+            </div>
+            
+          </div>
           <div key={currentWord.id} className={wordClass}>
             {currentWord.word}
           </div>
