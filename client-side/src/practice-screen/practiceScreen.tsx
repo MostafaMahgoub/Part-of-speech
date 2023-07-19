@@ -26,7 +26,6 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
     fetch("http://localhost:3000/words")
       .then((response) => response.json())
       .then((data: WordObject[]) => {
-        // Add a correctPos property to each WordObject
         const wordsWithPos = data.map((word) => ({
           ...word,
           correctPos: word.pos,

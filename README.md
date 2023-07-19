@@ -31,10 +31,13 @@ To start the server, navigate to the `server` folder and run:
 
 This will start the server on port 3000.
 
+**Please make sure it's running on 3000 because otherwill you'll have to update the client-side code**
+
 To start the client, navigate to the `client` folder and run:
 
 `npm start`
 
+**You'll have to run the client-side on another port since the server is using the 3000**
 
 ## Endpoints
 
