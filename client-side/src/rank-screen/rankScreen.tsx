@@ -2,7 +2,7 @@
 
 function rankScreen() {
   return (
-    <div className="App">
+    <div>
     </div>
   );
 }

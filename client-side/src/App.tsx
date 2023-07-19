@@ -4,6 +4,7 @@ import './index.css';
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isRankScreen, setIsRankScreen] = useState(false);
 
   const handleThemeToggle = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className="Main-Container">
-      <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
+      <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} setIsRankScreen={setIsRankScreen} isRankScreen={isRankScreen} />
     </div>
   );
 }

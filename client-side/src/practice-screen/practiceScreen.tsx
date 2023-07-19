@@ -5,7 +5,9 @@ import IconThemeComponent from "./IconThemeComponent";
 import ProgressBar from "./progressBar";
 interface PracticeScreenProps {
   isDarkTheme: boolean;
+  isRankScreen: boolean;
   handleThemeToggle: () => void;
+  setIsRankScreen: (value: boolean) => void;
 }
 
 interface WordObject {
@@ -14,7 +16,7 @@ interface WordObject {
   pos: string;
 }
 
-function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps) {
+function PracticeScreen({ isDarkTheme, handleThemeToggle , setIsRankScreen , isRankScreen }: PracticeScreenProps) {
   const [words, setWords] = useState<WordObject[]>([]);
   const [wordIndex, setWordIndex] = useState(0);
   const [showWords, setShowWords] = useState(false);
@@ -63,6 +65,10 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
     }
   };
 
+  const handelFinishClick = () => {
+    setIsRankScreen(true);
+  };
+
   const renderButton = (buttonPosition: string) => {
     return (
       <Button
@@ -81,6 +87,7 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
 
   return (
     <div>
+      {!isRankScreen &&(<div>
       {!showWords && (
         <Button
           isDarkTheme={isDarkTheme}
@@ -105,7 +112,7 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
               <Button
                 isDarkTheme={isDarkTheme}
                 title={completed ? "Finish" : "Next"}
-                onClick={handleNextClick}
+                onClick={completed ? handelFinishClick : handleNextClick}
                 style={{ backgroundColor: "" }}
                 disabled= {!answered}
               />
@@ -113,6 +120,7 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
          
         </div>
       )}
+      </div>)}
       <IconThemeComponent isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
     </div>
   );
