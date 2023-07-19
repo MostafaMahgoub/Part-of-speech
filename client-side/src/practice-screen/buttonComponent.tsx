@@ -25,7 +25,7 @@ function Button({ isDarkTheme, title, onClick, style, disabled }: ButtonProps) {
       }`}
       onClick={handleClick}
       id="Main-Button"
-      style={{ ...style, pointerEvents: disabled ? "none" : "auto" }}
+      style={{ ...style, pointerEvents: disabled ? "none" : "auto" , visibility: disabled && title == "Next" ? "hidden" : "visible" }}
     >
       <div id="circle"></div>
       <a

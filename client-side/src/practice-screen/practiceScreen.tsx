@@ -20,6 +20,7 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
   const [showWords, setShowWords] = useState(false);
   const [buttonColors, setButtonColors] = useState<{ [key: string]: string }>({});
   const [answered, setAnswered] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/words")
@@ -53,10 +54,14 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
     setAnswered(true);
   };
 
-  const handleRightClick = () => {
-    setWordIndex((prevIndex) => prevIndex + 1);
-    setButtonColors({});
-    setAnswered(false);
+  const handleNextClick = () => {
+    if (wordIndex === words.length - 1) {
+      setCompleted(true);
+    } else {
+      setWordIndex((prevIndex) => prevIndex + 1);
+      setButtonColors({});
+      setAnswered(false);
+    }
   };
 
   const renderButton = (buttonPosition: string) => {
@@ -96,16 +101,17 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
             {renderButton("adjective")}
             {renderButton("verb")}
           </div>
-          {answered && (
+
             <div className="Buttons-Container">
               <Button
                 isDarkTheme={isDarkTheme}
-                title="Next"
-                onClick={handleRightClick}
+                title={completed ? "Finish" : "Next"}
+                onClick={handleNextClick}
                 style={{ backgroundColor: "" }}
+                disabled= {!answered}
               />
             </div>
-          )}
+         
         </div>
       )}
       <IconThemeComponent isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} />
