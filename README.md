@@ -31,7 +31,7 @@ To start the server, navigate to the `server` folder and run:
 
 This will start the server on port 3000.
 
-**Please make sure it's running on 3000 because otherwill you'll have to update the client-side code**
+**Please make sure it's running on 3000 because otherwise you'll have to update the client-side code**
 
 To start the client, navigate to the `client` folder and run:
 
