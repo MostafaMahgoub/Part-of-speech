@@ -12,6 +12,7 @@ interface PracticeScreenProps {
   handleThemeToggle: () => void;
   setIsRankScreen: (value: boolean) => void;
   setRank: (value: number | null) => void;
+  setScore: (value: number | null) => void;
 }
 interface WordObject {
   id: number;
@@ -24,7 +25,8 @@ function PracticeScreen({
   handleThemeToggle,
   setIsRankScreen,
   isRankScreen,
-  setRank
+  setRank,
+  setScore
 }: PracticeScreenProps) {
   const [words, setWords] = useState < WordObject[] > ([]);
   const [wordIndex, setWordIndex] = useState(0);
@@ -85,8 +87,8 @@ function PracticeScreen({
               finalScore: score
           }),
       }).then((response) => response.json()).then((data) => {
-          console.log(data);
           setRank(data.rank);
+          setScore(score);
           setIsRankScreen(true);
       }).catch((error) => console.error(error));
   };
