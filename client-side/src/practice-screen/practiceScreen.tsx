@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./practiceScreen.sass";
 import Button from "./buttonComponent";
 import IconThemeComponent from "./IconThemeComponent";
-
+import ProgressBar from "./progressBar";
 interface PracticeScreenProps {
   isDarkTheme: boolean;
   handleThemeToggle: () => void;
@@ -86,17 +86,7 @@ function PracticeScreen({ isDarkTheme, handleThemeToggle }: PracticeScreenProps)
       )}
       {showWords && (
         <div className="word-container">
-          <div className="progress-bar-container">
-            <div
-              className="progress-bar"
-              style={{ width: `${progress}%` }}
-            >
-              <div className="progress-text">{`${Math.round(
-              progress
-            )}%`}</div>
-            </div>
-            
-          </div>
+          <ProgressBar progress={progress} />
           <div key={currentWord.id} className={wordClass}>
             {currentWord.word}
           </div>
