@@ -35,6 +35,7 @@ function PracticeScreen({
   const [answered, setAnswered] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [confirmation, setConfirmation] = useState(false);
   useEffect(() => {
       fetch("http://localhost:3000/words").then((response) => response.json()).then((data: WordObject[]) => {
           const wordsWithPos = data.map((word) => ({
@@ -43,9 +44,37 @@ function PracticeScreen({
           setWords(wordsWithPos);
       }).catch((error) => console.error(error));
   }, []);
+
+  useEffect(() => {
+    const handleBlur = () => {
+      if(showWords)
+      {
+      alert("Termination : You have clicked outside of the quiz area. Your quiz will be terminated.");
+      window.location.reload();
+      }
+    };
+
+    window.addEventListener("blur", handleBlur);
+
+    return () => {
+      window.removeEventListener("blur", handleBlur);
+    };
+  }, [showWords]);
+
   const handleClick = () => {
-      setShowWords(true);
-      setButtonColors({});
+    const confirmed = window.confirm("Warning: Clicking outside the quiz area will lead to the termination of the quiz. Your progress will be lost and you will need to start over. Do you want to start the quiz?");
+  
+    if (confirmed) {
+      setTimeout(() => {
+        setShowWords(true);
+        setButtonColors({});
+        setConfirmation(true);
+      }, 500);
+    }
+    else
+    {
+      setConfirmation(false);
+    }
   };
   const handleButtonClick = (buttonPosition: string) => {
       const currentWord = words[wordIndex];
@@ -109,6 +138,7 @@ function PracticeScreen({
         isDarkTheme={isDarkTheme}
         title="Start your practice"
         onClick={handleClick}
+        confirmation={confirmation}
       />
     )}
     {showWords && (

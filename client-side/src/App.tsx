@@ -22,6 +22,7 @@ function App() {
     }
   }, [bodyClassName]);
 
+
   return (
     <div className="Main-Container">
       {!isRankScreen &&  <PracticeScreen isDarkTheme={isDarkTheme} handleThemeToggle={handleThemeToggle} setIsRankScreen={setIsRankScreen} setRank={setRank} setScore={setScore} />}

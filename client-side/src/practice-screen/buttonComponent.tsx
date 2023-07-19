@@ -6,9 +6,10 @@ interface ButtonProps {
   onClick: () => void;
   style?: React.CSSProperties;
   disabled?: boolean;
+  confirmation?: boolean;
 }
 
-function Button({ isDarkTheme, title, onClick, style, disabled }: ButtonProps) {
+function Button({ isDarkTheme, title, onClick, style, disabled , confirmation }: ButtonProps) {
   const [fade, setFade] = useState(false);
 
   const handleClick = () => {
@@ -21,7 +22,7 @@ function Button({ isDarkTheme, title, onClick, style, disabled }: ButtonProps) {
   return (
     <div
       className={`button ${isDarkTheme ? "button-dark" : "button-light"} ${
-        shouldFade && fade ? "fade-out" : ""
+        confirmation && shouldFade && fade ? "fade-out" : ""
       }`}
       onClick={handleClick}
       id="Main-Button"
