@@ -2,6 +2,12 @@
 
 This is a web-based interactive activity that helps students practice categorizing words according to their part of speech. It uses React.js for the client side and node.js with Express.js for the server side.
 
+# Preview
+
+![Preview](1.png)
+![Preview](2.png)
+![Preview](3.png)
+
 ## Table of Contents
 
 - [Installation](#installation)
